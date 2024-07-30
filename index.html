@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Fawaz!</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+        }
+        .balloon {
+            width: 100px;
+            height: 140px;
+            background-color: #ff6f61;
+            border-radius: 50% 50% 0 0;
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        .balloon::before {
+            content: '';
+            width: 10px;
+            height: 20px;
+            background-color: #ff6f61;
+            position: absolute;
+            bottom: -20px;
+            left: 45px;
+        }
+        .string {
+            width: 2px;
+            height: 100px;
+            background-color: #000;
+            position: absolute;
+            bottom: -100px;
+            left: 49px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Birthday, Fawaz!</h1>
+    <div id="balloons"></div>
+    <img src="./fawaz.jpg" alt="Fawaz's Image" width="200">
+    <audio id="pop-sound" src="./pop-94319.mp3"></audio>
+    <audio id="birthday-song" src="./happy-birthday-155461.mp3"></audio>
+    <script>
+        const totalBalloons = 5;
+        let poppedCount = 0;
+
+        function createBalloon() {
+            const balloon = document.createElement('div');
+            balloon.classList.add('balloon');
+            balloon.addEventListener('click', () => {
+                document.getElementById('pop-sound').play();
+                balloon.remove();
+                poppedCount++;
+                if (poppedCount === totalBalloons) {
+                    setTimeout(() => {
+                        document.getElementById('birthday-song').play();
+                    }, 500);
+                }
+            });
+
+            const string = document.createElement('div');
+            string.classList.add('string');
+            balloon.appendChild(string);
+
+            document.getElementById('balloons').appendChild(balloon);
+        }
+
+        for (let i = 0; i < totalBalloons; i++) {
+            createBalloon();
+        }
+    </script>
+</body>
+</html>
